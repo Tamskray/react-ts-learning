@@ -1,8 +1,9 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { ITodo } from "../types/types";
+import { AddTodo, ITodo } from "../types/types";
 import List from "../components/List";
 import TodoItem from "../components/TodoItem";
+import AddTodoForm from "../components/AddTodoForm";
 
 const TodosPage = () => {
   const [todos, setTodos] = useState<ITodo[]>([]);
@@ -22,11 +23,32 @@ const TodosPage = () => {
     }
   }
 
+  const toggleTodo = (selectedTodo: ITodo) => {
+    const newTodos = todos.map((todo) => {
+      if (todo === selectedTodo) {
+        return {
+          ...todo,
+          completed: !todo.completed,
+        };
+      }
+      return todo;
+    });
+    setTodos(newTodos);
+  };
+
+  const addTodo: AddTodo = (title: string) => {
+    const newTodo = { id: todos.length + 1, title, completed: false };
+    setTodos([...todos, newTodo]);
+  };
+
   return (
     <>
+      <AddTodoForm addTodo={addTodo} />
       <List
         items={todos}
-        renderItem={(todo: ITodo) => <TodoItem todo={todo} key={todo.id} />}
+        renderItem={(todo: ITodo) => (
+          <TodoItem todo={todo} key={todo.id} toggleTodo={toggleTodo} />
+        )}
       />
     </>
   );

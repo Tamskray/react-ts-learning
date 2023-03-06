@@ -16,3 +16,7 @@ export interface ITodo {
   title: string;
   completed: boolean;
 }
+
+export type ToggleTodo = (selectedTodo: ITodo) => void;
+
+export type AddTodo = (title: string) => void;
