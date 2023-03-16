@@ -26,6 +26,7 @@ a:hover {
 
 body {
   margin: 0;
+  padding: 10px;
   display: flex;
   /* place-items: center; */
   min-width: 320px;
@@ -76,4 +77,8 @@ button:focus-visible {
 .user {
   padding: 15px;
   border: 1px solid gray;
+}
+
+.nav__item {
+  margin-left: 10px;
 }
